@@ -4,8 +4,10 @@ package pack01.controller;
 import com.sun.deploy.net.HttpResponse;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import pack01.bean.Person;
 import pack01.service.PersonSrevice;
@@ -14,6 +16,7 @@ import pack01.service.impl.PersonSreviceImpl;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -95,5 +98,24 @@ public class LoginController {
         return mv;
     }
 
+    //ResponseBody将return 的对象转成json字符串返回给浏览器
+    //RequestBody将浏览器提交过来的json数据转换成javaBean对象
+    @RequestMapping(path = "/testjson",method = {RequestMethod.GET,RequestMethod.POST})
+    public  @ResponseBody  List<Person> testjson(@RequestBody Person person) {
+        //1:获取页面的账号与密码
+        //2:业务查询账户密码是否正确
+        System.out.println(person);
+        PersonSrevice personSrevice=new PersonSreviceImpl();
+        int result = personSrevice.login(person.getName(),person.getPassword());
+        if(result == 1){
+            //查所有用户数据带到页面去显示list.jsp
+            List<Person> list = personSrevice.searchPerson("AAA");
+            return  list;
+
+        }else{
+            return new ArrayList<>();
+        }
+
+    }
 
 }
