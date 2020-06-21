@@ -33,4 +33,27 @@
     </bean>
     <!-- 配置springmvc 五 读的是@RequestMap -->
     <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--配置过滤静态资源(不拦截)-->
+    <!-- 样式
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    -->
+    <!-- 图片
+    <mvc:resources location="/images/" mapping="/images/**"/>
+     -->
+    <!-- javascript -->
+    <mvc:resources location="/js/" mapping="/js/**"/>
+
+    <!--配置拦截器-->
+    <!--声明拦截器配置-->
+    <mvc:interceptors>
+
+        <!--配置登录检查拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--设置不拦截的请求地址-->
+            <mvc:exclude-mapping path="/person/login"></mvc:exclude-mapping>
+            <bean class="pack01.interceptor.LoginHandlerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

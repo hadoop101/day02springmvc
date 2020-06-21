@@ -16,6 +16,7 @@ import pack01.service.impl.PersonSreviceImpl;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class LoginController {
     }
     */
     @RequestMapping(path = "/login",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView login(Person person) {
+    public ModelAndView login(Person person, HttpServletRequest request) {
         //1:获取页面的账号与密码
         //2:业务查询账户密码是否正确
         System.out.println(person);
@@ -88,6 +89,7 @@ public class LoginController {
         ModelAndView mv  = new ModelAndView();
         if(result == 1){
             //查所有用户数据带到页面去显示list.jsp
+            request.getSession().setAttribute("name",person.getName());
             List<Person> list = personSrevice.searchPerson("AAA");
             mv.addObject("list",list);//添加一个键值对，参1 键 参2 值
             mv.setViewName("list"); //默认是forward
@@ -109,6 +111,7 @@ public class LoginController {
         int result = personSrevice.login(person.getName(),person.getPassword());
         if(result == 1){
             //查所有用户数据带到页面去显示list.jsp
+
             List<Person> list = personSrevice.searchPerson("AAA");
             return  list;
 
