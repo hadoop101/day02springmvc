@@ -16,13 +16,21 @@
 
     -->
     <context:component-scan base-package="pack01.controller"></context:component-scan>
-
+    <!-- 配置springmvc 四 -->
     <!--请求处理器映射器  url与方法的绑定  search  绑定 search方法 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>-->
     <!--请求处理器适配器 处理search方法的参数与返回值-->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>
+<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>-->
 
-
-
+    <!--视图解析器
+         return "/WEB-INF/views/success.jsp";
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置页面地址的前缀-->
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <!--配置页面地址的后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <!-- 配置springmvc 五 读的是@RequestMap -->
     <mvc:annotation-driven></mvc:annotation-driven>
 </beans>

@@ -12,6 +12,6 @@ public class SearchController {
     public String search(String keyword){
         System.out.println(keyword);
         System.out.println("你调用了我的search方法");
-        return  "/success.jsp";
+        return  "success";
     }
 }
