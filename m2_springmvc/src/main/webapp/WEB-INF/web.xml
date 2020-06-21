@@ -4,6 +4,29 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <!--处理中文乱码
+    使用过滤器：使用spring提供的处理乱码的过滤器即可
+-->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+    <!--配置是否强制转型-->
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
   <!-- 配置springmvc 一：核心文件的配置-->
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
