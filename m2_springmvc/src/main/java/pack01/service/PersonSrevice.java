@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PersonSrevice {
     List<Person> searchPerson(String keyword);
+
+    int login(String username, String password);
 }

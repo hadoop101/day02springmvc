@@ -11,7 +11,20 @@ public class PersonSreviceImpl implements PersonSrevice {
     @Override
     public List<Person> searchPerson(String keyword) {
         PersonDao personDao=new PresonDaoImpl();
-
         return   personDao.find(keyword);
+    }
+
+    @Override
+    public int login(String username, String password) {
+        PersonDao personDao=new PresonDaoImpl();
+        Person person=new Person();
+        person.setName(username);
+        person.setPassword(password);
+        Person person1 = personDao.find2(person);
+        if (person1 == null){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

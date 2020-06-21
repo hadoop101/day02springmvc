@@ -16,4 +16,18 @@ public class PresonDaoImpl implements PersonDao {
         }
         return list;
     }
+    private static   List<Person> list=new ArrayList<>();
+    static {
+        list.add(new Person("jack","1234","33"));
+    }
+    @Override
+    public Person find2(Person person) {
+        Person per =null;
+        for(Person p:list){
+            if(p.getName().equals(person.getName())&&p.getPassword().equals(person.getPassword())){
+                per=p;
+            }
+        }
+        return per;
+    }
 }
